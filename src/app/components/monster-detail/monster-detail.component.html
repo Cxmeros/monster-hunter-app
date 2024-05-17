@@ -1,49 +1,64 @@
-<div class="container flex flex-col items-center mx-auto mt-8">
-  @if (loading) {
-    <div class="flex flex-col items-center">
-      <img class="w-52" src="assets/img/mh-cat-animation.gif" alt="">
-      <h3 class="text-center mt-8 font-extrabold">LOADING...</h3>
-    </div>
-  } @if (!loading && monster) {
+@if (loading) {
+  <div class="flex flex-col items-center">
+    <img class="w-52" src="assets/img/mh-cat-animation.gif" alt="" />
+    <h3 class="text-center text-millbrook-950 mt-8 font-extrabold">LOADING...</h3>
+  </div>
+}
+@if (!loading && monster) {
+    <div
+      class="container flex flex-col items-center lg:max-w-4xl w-4/5 md:w-4/5 sm:w-4/5 max-[430px]:w-4/5 p-5 py-10 mx-auto mt-8 bg-millbrook-800 text-millbrook-200 rounded-xl"
+      >
   <img
     class="h-56 w-auto"
     [src]="getRenderPath(monster.name)"
     alt="{{ monster.name }}"
   />
-  <h1 class="mt-6 text-xl uppercase font-bold">{{ monster.name }}</h1>
-  <h2 class="text-lg capitalize">{{ monster.species }}</h2>
-  <p class="w-full md:w-2/4 mt-6 text-lg text-justify">
+  <h1 class="mt-6 text-3xl uppercase font-bold"><span class="text-millbrook-300">{{ monster.name }}</span></h1>
+  <h2 class="text-xl capitalize">{{ monster.species }}</h2>
+  <p class="w-full md:w-3/4 mt-6 text-xl text-justify">
     {{ monster.description }}
   </p>
-  <div class="text-center mt-4 font-bold w-full md:w-56">
-    @if (monster.elements.length) { Elements
-    <div class="flex flex-row flex-wrap justify-between">
+  @if (monster.elements.length) {
+  <div class="w-4/5 h-2 bg-millbrook-950 mt-6 rounded-full"></div>
+  <div class="text-center mt-4 font-bold w-full md:w-3/4">
+    <span class="text-millbrook-300">Elements</span>
+    <div class="flex flex-row flex-wrap justify-between sm:px-10">
       @for (element of monster.elements; track $index) {
-      <span class="mt-4 capitalize font-normal">{{ element }}</span>
+      <span class="mt-4 capitalize font-semibold text-lg">{{ element }}</span>
       }
     </div>
-    }
   </div>
-  <div class="text-center mt-4 font-bold w-full md:w-56">
-    @if (monster.resistances.length) { Resistances
-    <div class="flex flex-row flex-wrap justify-between">
+  } @if (monster.resistances.length) {
+  <div class="w-4/5 h-2 bg-millbrook-950 mt-6 rounded-full"></div>
+  <div class="text-center mt-6 font-bold w-full md:w-3/4">
+    <span class="text-millbrook-300">Resistances</span>
+    <div class="flex flex-row flex-wrap justify-between sm:px-10">
       @for (resistance of monster.resistances; track $index) {
-      <span class="mt-4 capitalize font-normal">{{ resistance.element }}</span>
+      <span class="mt-4 capitalize font-semibold text-lg">{{
+        resistance.element
+      }}</span>
       }
     </div>
-    }
   </div>
-  <div class="text-center mt-4 font-bold w-full md:w-1/3">
-    @if (monster.resistances.length) { Weaknesses
+  } @if (monster.resistances.length) {
+  <div class="w-4/5 h-2 bg-millbrook-950 mt-6 rounded-full"></div>
+  <div class="text-center mt-6 font-bold w-full md:w-3/4">
+    <span class="text-millbrook-300">Weaknesses</span>
     <div class="flex flex-row flex-wrap justify-between">
       @for (weakness of monster.weaknesses; track $index) {
       <div class="flex flex-col items-center">
-        <span class="mt-4 capitalize font-normal">{{ weakness.element }}</span>
-        <span class="mt-2 font-normal">{{ weakness.stars }}</span>
+        <span class="mt-4 capitalize font-semibold text-lg">{{
+          weakness.element
+        }}</span>
+        <div class="container flex flex-row w-28 justify-center">
+          @for(star of getStars(weakness.stars); track $index){
+          <img class="w-6 h-6" src="assets/img/star.png" alt="star" />
+          }
+        </div>
       </div>
       }
     </div>
-    }
   </div>
   }
 </div>
+}

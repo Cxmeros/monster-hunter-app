@@ -12,6 +12,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit{
+
+  showSearchInput: boolean = true;
+
   searchControl = new FormControl();
 
   _searchService = inject(SearchService);
